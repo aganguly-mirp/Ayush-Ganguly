@@ -1,21 +1,34 @@
-float velocityIncrease = 0.2;
 void updateBallVelocity() {
- // if (LEFT){
-  //  ballVx=ballVx-velocityIncrease;}
-  //if (RIGHT){
-   // ballVx=ballVx + velocityIncrease;
- // }
-  //if ((!left)&&(!right)){
-  //  ballVx=0;}
-//  if (UP){
-  //  ballVy-=velocityIncrease;}
-  //if (DOWN){
-  //  ballVy+=velocityIncrease;}
-  //if((!down)&&(!up)){
-  //  ballVy=0;}
+  if (ballY<ballRadius)
+  {ballVy=-ballVy;
+  ballY=ballRadius;
+  ax=ballVx;
+  ay=ballVy;}
+  
+  if (ballY>displayHeight-ballRadius){
+    ballVy=-ballVy;
+    ballY=displayHeight-ballRadius;
+    ax=ballVx;
+    ay=ballVy;
     
-  // Add control for movement keys here
- // ballVy+=gravity;
+    if (ballX<=ballRadius)
+    leftLose ();
+    
+    if (ballX>=displayWidth-ballRadius)
+    rightLose ();
+    
+    if (ballX<=ballRadius+paddleWidth){
+    }
+  if ((ballY<=leftPaddle+paddleLength) && (ballY>=leftPaddle))
+    {ballVx=-ballVx;
+    ballX=ballRadius+paddleWidth;
+    
+    ballVy=(2+BALL_VELOCITY*(ballY-leftPaddle)/(paddleLength)-BALL_VELOCITY);
+    ax=ballVx;
+    ay=ballVy;
+    }
+}
+
 }
 
 void updateBallPositions() {
@@ -39,4 +52,6 @@ void updatePaddlePosition() {
   if(rightPaddle<displayHeight-paddleLength){
   if(right_down)
   rightPaddle+=PADDLE_VELOCITY;}
+  
+  
 }
